@@ -1,0 +1,3 @@
+[submodule "trimtr-api"]
+	path = trimtr-api
+	url = https://github.com/nishi-yuki/trimtr-api.git
