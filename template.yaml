@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWS SAM for trimtr-api
+
+Resources:
+  Trimtr:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: trimtr-api/
+      Handler: lambda.handler
+      Runtime: python3.6
+      MemorySize: 256
+      Timeout: 90
+      Events:
+        Trim:
+          Type: Api
+          Properties:
+            Path: /trim
+            Method: post
+
+Outputs:
+  TrimtrApiURL:
+    Description: "API Gateway endpoint URL for Prod stage for Trimtr Api"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/trim/"
+  TrimtrARN:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt Trimtr.Arn
+  TrimtrIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt TrimtrRole.Arn
